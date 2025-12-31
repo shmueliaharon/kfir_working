@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <title>מסלול הטיול שלי – 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <h1 id="appTitle">מסלול הטיול שלי</h1>
+    <p id="appSub">בחר יום כדי לראות פירוט</p>
+  </header>
+
+  <main id="viewHome">
+    <div id="dayList"></div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  color: #1f2937;
+}
+.top {
+  background: white;
+  padding: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.day {
+  background: white;
+  margin: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.day h3 {
+  margin: 0 0 6px 0;
+  {
+  "title": "מסלול הטיול שלי – 2026",
+  "days": [
+    {
+      "date": "23.12.2025",
+      "location": "בנגקוק",
+      "country": "תאילנד",
+      "lodging": "Siam Stadium Hostel",
+      "places": [
+        { "name": "מתחם מקדשי המלך" },
+        { "name": "Chatuchak Market" }
+      ]
+    },
+    {
+      "date": "27.12.2025",
+      "location": "קופנגן",
+      "country": "תאילנד",
+      "lodging": "Haad Rin Beach",
+      "places": [
+        { "name": "חוף האדרין" }
+      ]
+    }
+  ]
+}
+Commit.
+
+D. app.js (פשוט ויציב)
+Add file → Create new file → app.js
+
+js
+Copy code
+fetch('itinerary.json')
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById('appTitle').textContent = data.title;
+    const list = document.getElementById('dayList');
+
+    data.days.forEach(day => {
+      const d = document.createElement('div');
+      d.className = 'day';
+      d.innerHTML = `
+        <h3>${day.date} – ${day.location}</h3>
+        <div>מדינה: ${day.country}</div>
+        <div>לינה: ${day.lodging}</div>
+        <ul>
+          ${(day.places || []).map(p => `<li>${p.name}</li>`).join('')}
+        </ul>
+      `;
+      list.appendChild(d);
+    });
+  });
+Commit.
+fetch('itinerary.json')
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById('appTitle').textContent = data.title;
+    const list = document.getElementById('dayList');
+
+    data.days.forEach(day => {
+      const d = document.createElement('div');
+      d.className = 'day';
+      d.innerHTML = `
+        <h3>${day.date} – ${day.location}</h3>
+        <div>מדינה: ${day.country}</div>
+        <div>לינה: ${day.lodging}</div>
+        <ul>
+          ${(day.places || []).map(p => `<li>${p.name}</li>`).join('')}
+        </ul>
+      `;
+      list.appendChild(d);
+    });
+  });
+
+
+
